@@ -33,111 +33,59 @@ export default function LoginScreen() {
   const formaIngressoOptions = ['Vestibular', 'Enem', 'Em Curso / Declaração de Matrícula'];
 
   const steps = [
-    { number: 1, label: "Dados Gerais", active: true },
-    { number: 2, label: "Identificação do Candidato", active: false },
-    { number: 3, label: "Familiares e Escolaridade", active: false },
-    { number: 4, label: "Socioeconômico e Habitação", active: false },
-    { number: 5, label: "Despesas e Transporte", active: false },
+  { number: 1, label: "Dados Gerais" },
+  { number: 2, label: "Identificação do Candidato" },
+  { number: 3, label: "Familiares e Escolaridade" },
+  { number: 4, label: "Socioeconômico e Habitação" },
+  { number: 5, label: "Despesas e Transporte" },
+]; const [currentStep, setCurrentStep] = useState(1);
+  
+  // Lista de itens do menu com ícones e labels
+    const menuItems = [
+  { label: 'Início', icon: require('../../assets/Home filled.png') },
+  { label: 'Inscrição', icon: require('../../assets/Form.png') },
+  { label: 'Pendências', icon: require('../../assets/Box Important.png') },
+  { label: 'Requerimentos', icon: require('../../assets/Application Form.png') },
+  { label: 'Recadastramento', icon: require('../../assets/user-pen-solid 1.png') },
+  { label: 'Histórico de Candidaturas', icon: require('../../assets/History.png') },
+  { label: 'Configurações', icon: require('../../assets/Automation.png') },
+  { label: 'Ajuda e Suporte', icon: require('../../assets/Exittoapp.png') },
+  { label: 'Sair', icon: require('../../assets/Exittoapp.png') },
   ];
 
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.inner}>
-    {/* Menu Topo */}
-    <View style={styles.menuHeader}>
-      <TouchableOpacity onPress={toggleMenu}>
-      <Image
-                source={require('../../assets/Menu.png')}
-                style={styles.logoMenu}/>
-      </TouchableOpacity>
-      <Image
-      source={require('../../assets/logo2.png')}
-      style={styles.logoImage}/>
-
-      <Image
-      source={require('../../assets/bell.png')}
-      style={styles.bellIcon}/>
-    </View>
-
- {/* Menu Lateral em Modal */}
-<Modal visible={isMenuOpen} transparent animationType="fade">
-  <View style={styles.modalOverlay}>
-    <View style={styles.modalContent}>
-      <TouchableOpacity onPress={toggleMenu}>
-        <Image
-          source={require('../../assets/menu-close.png')}
-          style={styles.menuFechar}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Home filled.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Início</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {/* Container principal */}
+      <View /*style={styles.inner}*/>
+        {/* Menu Topo */}
+        <View style={styles.menuHeader}>
+          <TouchableOpacity onPress={toggleMenu}>
+            <Image source={require('../../assets/Menu.png')} style={styles.logoMenu} />
+          </TouchableOpacity>
+          <Image source={require('../../assets/logo2.png')} style={styles.logoImage} />
+          <Image source={require('../../assets/bell.png')} style={styles.bellIcon} />
         </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Form.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Inscrição</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Box Important.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Pendências</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Application Form.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Requerimentos</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/user-pen-solid 1.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Recadastramento</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/History.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Histórico de Candidaturas</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Automation.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Configurações</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Exittoapp.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Ajuda e Suporte</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.menuItem}>
-        <View style={styles.menuItemContent}>
-          <Image source={require('../../assets/Exittoapp.png')} style={styles.menuIcon} />
-          <Text style={styles.menuItemText}>Sair</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
-
-      
-
+  
+        {/* Menu Lateral em Modal */}
+        <Modal visible={isMenuOpen} transparent animationType="fade">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity onPress={toggleMenu}>
+                <Image source={require('../../assets/menu-close.png')} style={styles.menuFechar} />
+              </TouchableOpacity>
+  
+              {menuItems.map((item, index) => (
+                <TouchableOpacity key={index} style={styles.menuItem}>
+                  <View style={styles.menuItemContent}>
+                    <Image source={item.icon} style={styles.menuIcon} />
+                    <Text style={styles.menuItemText}>{item.label}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </Modal>
         {/* Botão de Voltar */}
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <View style={styles.backIconWrapper}>
@@ -146,19 +94,32 @@ export default function LoginScreen() {
           <Text style={styles.backText}>Ficha de Diligência</Text>
         </TouchableOpacity>
 
-        {/* Etapas */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.stepperScrollContainer}>
-          {steps.map((step) => (
-            <View key={step.number} style={styles.stepWrapper}>
-              <View style={[styles.stepCircle, { backgroundColor: step.active ? '#B0CB0E' : '#ccc' }]}>
-                <Text style={styles.stepNumber}>{step.number}</Text>
-              </View>
-              <View style={[styles.stepLabelContainer, { backgroundColor: step.active ? '#006497' : '#e5e7eb' }]}>
-                <Text style={[styles.stepLabel, { color: step.active ? '#fff' : '#374151' }]}>{step.label}</Text>
-              </View>
-            </View>
-          ))}
-        </ScrollView>
+               {/* Etapas */}
+             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.stepperScrollContainer}>
+                 {steps.map((step) => {
+                   const isCurrent = step.number === currentStep;
+                   const isPast = step.number < currentStep;
+       
+                   const opacity = isPast ? 0.5 : 1;
+                   const circleColor = isCurrent || isPast ? '#B0CB0E' : '#ccc';
+                   const labelBgColor = isCurrent || isPast ? '#006497' : '#e5e7eb';
+                   const labelTextColor = isCurrent || isPast ? '#fff' : '#374151';
+       
+                   return (
+                     <View
+                       key={step.number}
+                       style={[styles.stepWrapper, { opacity }]}>
+                       <View style={[styles.stepCircle, { backgroundColor: circleColor }]}>
+                         <Text style={styles.stepNumber}>{step.number}</Text>
+                       </View>
+                       <View style={[styles.stepLabelContainer, { backgroundColor: labelBgColor }]}>
+                         <Text style={[styles.stepLabel, { color: labelTextColor }]}>
+                           {step.label}
+                         </Text>
+                       </View></View>
+                   );
+                 })}
+               </ScrollView>
 
         {/* MOTIVO DA INDICAÇÃO */}
         <View style={styles.section}>
@@ -234,101 +195,95 @@ const getStyles = (isDark: boolean, screenWidth: number) => {
 
   return StyleSheet.create({
 
-    //menu lateral
-    scrollContainer: {
-      flexGrow: 1,
-      backgroundColor: isDark ? '#0F1C2E' : '#fff',
-      alignItems: 'center',
-      paddingVertical: 1,
-    },
-    inner: { width: containerWidth },
-    menuHeader: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 16,
-      borderRadius: 8,
-      marginBottom: 20,
-    },
-    menuTitle: {
-      color: '#fff',
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
-    modalOverlay: {
-      flex: 1,
-      justifyContent: 'flex-start',
-    },
-    modalContent: {
-      width: 322,
-      height: 800,
-      backgroundColor: '#F3F3F3',
-      padding: 20,
-      gap: 4,
-      borderTopRightRadius: 16,
-      borderBottomRightRadius: 16,
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
-    },
-    logoMenu: {
-      width: 40,
-      height: 40,
-      left: -115,
-      position: 'relative',
-      resizeMode: 'contain',
-    },
-    menuFechar: {
-      width: 20,
-      height: 20,
-      position: 'relative',
-      resizeMode: 'contain',
-      padding: 15,
-      right: -250,
-    },
-    closeButtonText: {
-      color: '#fff',
-      fontSize: 16,
-    },
-    menuItem: {
-      paddingVertical: 10,
-    },
-    menuItemText: {
-      color: '#1A2353',
-      fontSize: 16,
-      fontFamily: 'Montserrat',
-      fontWeight: '500',
-      lineHeight: 16,
-      letterSpacing: 0,
-      textAlignVertical: 'center', // equivalente a vertical-align: middle
-    },
-    menuIcon: {
-      width: 24,
-      height: 24,
-      color: '#1A2353',
-      resizeMode: 'contain',
-      marginRight: 12, 
-    },
-    menuItemContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 12, 
-    },
-    bellIcon: {
-      width: 20,
-      height: 20,
-      left: 110,
-      color: '#1A2353',
-      position: 'relative',
-      resizeMode: 'contain',
-    },
-
-    //logo central
-    logoImage: {
-        width: 286,
-        height: 40,
-        position: "relative",
-        resizeMode: 'contain',
-    },
+    // Menu lateral
+  scrollContainer: {
+    flexGrow: 1,
+    backgroundColor: isDark ? '#0F1C2E' : '#fff',
+    alignItems: 'center',
+    paddingVertical: 1,
+  //},
+  //inner: {
+    //width: containerWidth,
+  },
+  menuHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 16,
+    marginBottom: 25,
+  },
+  menuTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  modalContent: {
+    width: 322,
+    height: '100%',
+    backgroundColor: '#F3F3F3',
+    padding: 20,
+    borderTopRightRadius: 16,
+    borderBottomRightRadius: 16,
+    alignItems: 'flex-start',
+  },
+  logoMenu: {
+    width: 32,
+    height: 32,
+    resizeMode: 'contain',
+    marginLeft: -20,
+  },
+  logoImage: {
+    width: 200,
+    height: 40,
+    resizeMode: 'contain',
+  },
+  bellIcon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+  menuFechar: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+    alignSelf: 'flex-end',
+    marginBottom: 16,
+  },
+  closeButtonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  menuItem: {
+    paddingVertical: 10,
+    width: '100%',
+  },
+  menuItemContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  menuIcon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+    marginRight: 12,
+    color: '#1A2353',
+  },
+  menuItemText: {
+    color: '#1A2353',
+    fontSize: 16,
+    fontFamily: 'Montserrat',
+    fontWeight: '500',
+    lineHeight: 16,
+    letterSpacing: 0,
+    textAlignVertical: 'center',
+    flexShrink: 1,
+  },
 
     //botão voltar ficha de diligencia
     backButton: {
@@ -353,44 +308,45 @@ const getStyles = (isDark: boolean, screenWidth: number) => {
       color: '#0F4C81',
     },
 
-    //munu rolagem em tela
-    stepperScrollContainer: {
-      flexDirection: 'row',
-      marginBottom: 30,
-    },
-    stepWrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginRight: 10,
-    },
-    stepCircle: {
-      width: 32,
-      height: 32,
-      borderRadius: 16,
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 1,
-    },
-    stepNumber: {
-      color: '#fff',
-      fontWeight: 'bold',
-      position: 'absolute',
-    },
-    stepLabelContainer: {
-      marginLeft: -30,
-      paddingLeft: 40,
-      borderRadius: 20,
-      paddingVertical: 8,
-      paddingHorizontal: 10,
-    },
-    stepLabel: {
-      fontSize: 12,
-      fontWeight: '600',
-    },
-    section: {
-      marginBottom: 20,
-    },
+     // Menu de rolagem horizontal (stepper)
+  stepperScrollContainer: {
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+  stepWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  stepCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  stepNumber: {
+    color: '#fff',
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
+  stepLabelContainer: {
+    marginLeft: -30,
+    paddingLeft: 40,
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+  },
+  stepLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
 
+  // Seções genéricas
+  section: {
+    marginBottom: 20,
+  },
     //campos de texto
     Titulos: {
         fontWeight: '600',
@@ -402,15 +358,14 @@ const getStyles = (isDark: boolean, screenWidth: number) => {
         color: isDark ? '#fff' : '#000',
     },
     input: {
-      height: 50,
-      borderRadius: 60,
-      borderWidth: 1,
-      borderColor: 'rgba(0, 30, 49, 1)',   
-      paddingHorizontal: 12,
-      fontSize: 16,
-        //borderColor: isDark ? '#555' : '#ccc',
-      //color: isDark ? '#fff' : '#000',
-      backgroundColor: isDark ? '#1e293b' : '#f9fafb',
+        fontWeight: 'bold',
+        height: 40,
+        borderRadius: 60,
+        borderWidth: 1,
+        paddingTop: 10.5,
+        paddingRight: 16,
+        paddingBottom: 11.5,
+        paddingLeft: 16, 
     },
     input2: {
         height: 118,
