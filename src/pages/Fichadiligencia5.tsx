@@ -42,13 +42,13 @@ export default function LoginScreen() {
   const [obsadicional, setObsadicional] = useState('');
 
   const [selectedForma, setSelectedForma] = useState('');
-  const formaOptions = ['Sim', 'Não'];
+  const formaOptions = ['Não', 'Sim'];
 
   const [selectedFormaSN, setSelectedFormaSN] = useState('');
-  const formaSNOptions = ['Sim', 'Não'];
+  const formaSNOptions = ['Não', 'Sim'];
 
   const [selectedFormaSNN, setSelectedFormaSNN] = useState('');
-  const formaSNNOptions = ['Sim', 'Não'];
+  const formaSNNOptions = ['Não', 'Sim'];
 
   const [selectedForma2, setSelectedForma2] = useState('');
   const formaTransporteOptions = [
@@ -154,7 +154,7 @@ export default function LoginScreen() {
     <Text style={styles.Titulos}>Estimativa de Despesas Diversas</Text>
     <Text style={styles.Titulo2}>Há no domicílio, pessoas com deficiências (PCD)?</Text>
     <View style={styles.row}>
-      <View style={[styles.horizontalOptions, { flex: 2, marginRight: 10 }]}>
+      <View style={[styles.horizontalOptions, { flex: 1, marginRight: 10 }]}>
         {formaOptions.map((option) => (
           <TouchableOpacity
             key={option}
@@ -186,7 +186,7 @@ export default function LoginScreen() {
 
     <Text style={styles.Titulo2}>O/a Candidato(a) e/ou familiar possui doenças crônicas?</Text>
     <View style={styles.row}>
-      <View style={[styles.horizontalOptions, { flex: 2 }]}>
+      <View style={[styles.horizontalOptions, { flex: 1 }]}>
         {formaSNOptions.map((option) => (
           <TouchableOpacity
             key={option}
@@ -218,7 +218,7 @@ export default function LoginScreen() {
 
     <Text style={styles.Titulo2}>Estimativa de despesas mensais com medicações e ou tratamento de doenças crônicas:</Text>
     <TextInput
-      style={styles.input}
+      style={styles.inputValorMedio}
       placeholder="Valor Médio (R$)"
       placeholderTextColor={isDark ? '#aaa' : '#888'}
       value={valordespesas}
@@ -226,7 +226,7 @@ export default function LoginScreen() {
     />
 
     <Text style={styles.Titulo2}>Utiliza medicação fornecida pelo Setor Público?</Text>
-    <View style={[styles.horizontalOptions, { flex: 2, marginBottom: 20 }]}>
+    <View style={[styles.horizontalOptions, { flex: 1, marginBottom: 20 }]}>
       {formaSNNOptions.map((option) => (
         <TouchableOpacity
           key={option}
@@ -256,7 +256,7 @@ export default function LoginScreen() {
         onChangeText={setAlimentacao}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, { flex: 1, marginRight: 10 }]}
         placeholder="Gás (R$)"
         placeholderTextColor={isDark ? '#aaa' : '#888'}
         value={gas}
@@ -279,7 +279,7 @@ export default function LoginScreen() {
         onChangeText={setAgua}
       />
       <TextInput
-        style={[styles.input, { flex: 1 }]}
+        style={[styles.input, { flex: 1, marginRight: 10 }]}
         placeholder="Luz (R$)"
         placeholderTextColor={isDark ? '#aaa' : '#888'}
         value={luz}
@@ -300,7 +300,7 @@ export default function LoginScreen() {
     <Text style={styles.Titulo2}>Observações:</Text>
     <View style={styles.row}>
       <TextInput
-        style={[styles.input]}
+        style={[styles.inputOBS]}
         placeholder="Descreva"
         placeholderTextColor={isDark ? '#aaa' : '#888'}
         value={obs}
@@ -327,7 +327,7 @@ export default function LoginScreen() {
         ))}
       </View>
       <TextInput
-        style={[styles.input, { flex: 1, marginRight: 10 }]}
+        style={[styles.inputOutros, { flex: 1, marginRight: 10 }]}
         placeholder="Qual?"
         placeholderTextColor={isDark ? '#aaa' : '#888'}
         value={outrotransporte}
@@ -337,7 +337,7 @@ export default function LoginScreen() {
 
     <Text style={styles.Titulo2}>Candidato(a) e/ou familiar possui transporte próprio?</Text>
     <View style={styles.row}>
-      <View style={[styles.horizontalOptions, { flex: 2, marginRight: 10 }]}>
+      <View style={[styles.horizontalOptions, { flex: 1, marginRight: 10 }]}>
         {formaOptions.map((option) => (
           <TouchableOpacity key={option} style={styles.optionContainer} onPress={() => setSelectedForma(option)}>
             <View style={[styles.radioCircle, selectedForma === option && styles.radioCircleSelected]}>
@@ -358,7 +358,7 @@ export default function LoginScreen() {
         ))}
       </View>
       <TextInput
-        style={[styles.input, { flex: 1, marginRight: 10 }]}
+        style={[styles.inputOutros, { flex: 1, marginRight: 10 }]}
         placeholder="Qual?"
         placeholderTextColor={isDark ? '#aaa' : '#888'}
         value={transporteproprio}
@@ -373,7 +373,7 @@ export default function LoginScreen() {
     <Text style={styles.Titulos}>Finalização</Text>
     <Text style={styles.Titulo2}>Quem respondeu as perguntas durante a visita?</Text>
     <View style={styles.row}>
-      <View style={[styles.horizontalOptions, { flex: 2, marginRight: 10 }]}>
+      <View style={[styles.horizontalOptions, { flex: 1, marginRight: 10 }]}>
         {formaRespostasOptions.map((option) => (
           <TouchableOpacity key={option} style={styles.optionContainer} onPress={() => setSelectedForma4(option)}>
             <View style={[styles.radioCircle, selectedForma4 === option && styles.radioCircleSelected]}>
@@ -399,7 +399,7 @@ export default function LoginScreen() {
             <Text style={styles.Titulo2}>Observações adicionais:</Text>
             <View style={styles.row}>
             <TextInput
-            style={[styles.input]}
+            style={[styles.inputOBS]}
             placeholder="Descreva"
             placeholderTextColor={isDark ? '#aaa' : '#888'}
             value={obsadicional}
@@ -408,8 +408,18 @@ export default function LoginScreen() {
           </View>
         </View>
         </ScrollView>
-      </View>
-      </ScrollView>
+
+        {/* Botões */}
+              <View style={styles.buttonRow}>
+                <TouchableOpacity style={styles.saveButton}>
+                  <Text style={styles.buttonText}>Salvar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nextButton}>
+                  <Text style={styles.buttonText}>Próximo</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
 );
 
 } 
@@ -425,9 +435,9 @@ export default function LoginScreen() {
     backgroundColor: isDark ? '#0F1C2E' : '#fff',
     alignItems: 'center',
     paddingVertical: 1,
-  //},
-  //inner: {
-    //width: containerWidth,
+  },
+  inner: {
+    width: containerWidth,
   },
   menuHeader: {
     flexDirection: 'row',
@@ -436,6 +446,7 @@ export default function LoginScreen() {
     width: '100%',
     paddingHorizontal: 16,
     marginBottom: 25,
+    marginHorizontal: 10,
   },
   menuTitle: {
     color: '#fff',
@@ -515,7 +526,8 @@ export default function LoginScreen() {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    marginBottom: 20,
+    marginLeft: 20,
+    padding: 10,
   },
   backIconWrapper: {
     width: 32,
@@ -526,6 +538,7 @@ export default function LoginScreen() {
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 8,
+    marginLeft: 5,
   },
   backText: {
     fontSize: 16,
@@ -541,7 +554,7 @@ export default function LoginScreen() {
   stepWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10,
+    marginLeft: 20,
   },
   stepCircle: {
     width: 32,
@@ -571,14 +584,17 @@ export default function LoginScreen() {
   // Seções genéricas
   section: {
     marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
   //campos de texto
     Titulos: {
-        fontWeight: '600',
-        fontSize: 20,
-        lineHeight: 29.6,
-        marginBottom: 10,
-        color: isDark ? '#fff' : '#000',
+    fontWeight: '600',
+    fontSize: 20,
+    lineHeight: 29.6,
+    marginBottom: 10,
+    marginLeft: 20,
+    color: isDark ? '#fff' : '#000',
     },
     Titulo2: {
     fontFamily: 'Open Sans',
@@ -587,33 +603,35 @@ export default function LoginScreen() {
     lineHeight: 13.33, // 100% de 13.33px
     letterSpacing: 0,
     textAlignVertical: 'center',
+    padding: 5,
+    marginLeft: 20,
     },
     input: {
         fontWeight: 'bold',
         height: 40,
         borderRadius: 60,
         borderWidth: 1,
-        paddingTop: 10.5,
-        paddingRight: 16,
-        paddingBottom: 11.5,
-        paddingLeft: 16,
-
+        paddingHorizontal: 12,
+        borderColor: 'rgba(0, 30, 49, 1)',
+        fontSize: 16,
+        marginLeft: 20,
     },
     input2: {
         fontWeight: 'bold',
         height: 118,
-        borderRadius: 16,
+        borderRadius: 50,
         borderWidth: 1,
         paddingHorizontal: 12,
-        borderColor: 'rgba(0, 30, 49, 1)',
+        borderColor: 'rgb(0, 0, 0)',
         fontSize: 16,
         //borderColor: isDark ? '#555' : '#ccc',
         color: isDark ? '#fff' : '#000',
         backgroundColor: isDark ? '#1e293b' : '#f9fafb',
+        marginLeft: 20,
       },
 
     inputIdade: {
-      fontWeight: 'bold',
+      //fontWeight: 'bold',
         width: 198,
         height: 40,
         borderRadius: 60,
@@ -622,6 +640,42 @@ export default function LoginScreen() {
         paddingRight: 16,
         paddingBottom: 11.5,
         paddingLeft: 10,
+        marginLeft: 20,
+    },
+    inputOBS: {
+        //fontWeight: 'bold',
+        width: 760,
+        height: 118,
+        borderRadius: 30,
+        borderWidth: 1,
+        paddingRight: 16,
+        paddingBottom: 11.5,
+        paddingLeft: 10,
+        paddingHorizontal: 12,
+        borderColor: 'rgb(0, 0, 0)',
+        fontSize: 16,
+        marginLeft: 20,
+    },
+    inputValorMedio:{
+      //fontWeight: 'bold',
+      width: 350,
+      height: 50,
+      borderRadius: 60,
+      borderWidth: 1,
+      paddingHorizontal: 10,
+      marginLeft: 20,
+    },
+    inputOutros: {
+      //fontWeight: 'bold',
+        width: 198,
+        height: 40,
+        borderRadius: 60,
+        borderWidth: 1,
+        paddingTop: 10.5,
+        paddingRight: 16,
+        paddingBottom: 11.5,
+        paddingLeft: 10,
+        marginTop: 90,
     },
     row: {
       flexDirection: 'row',
@@ -631,13 +685,14 @@ export default function LoginScreen() {
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: 10,
+      marginLeft: 20,
     },
     radioCircle: {
       width: 20,
       height: 20,
       borderRadius: 10,
-      borderWidth: 2,
-      borderColor: '#1e40af',
+      borderWidth: 1,
+      borderColor: 'rgb(0, 0, 0)',
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: 10,
@@ -654,59 +709,7 @@ export default function LoginScreen() {
       flexWrap: 'wrap',
       gap: 10,
     },
-    AddButton: {
-        backgroundColor: '#006497',
-        paddingVertical: 10,
-        paddingHorizontal: 55,
-        borderRadius: 35,
-        justifyContent: "center",
-       marginRight: 10,
-    },
-    // card informativo pessoal
-    card: {
-      backgroundColor: '#fff',
-      borderRadius: 12,
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-      elevation: 3,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.2,
-      shadowRadius: 1.41,
-    },
-    row2: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 6,
-      flexWrap: 'wrap',
-      fontFamily: 'Open Sans',
-      fontWeight: '600',
-      fontSize: 13,
-      lineHeight: 15,
-      letterSpacing: 0,
-    },
-    infoGroup: {
-      flex: 1,
-      minWidth: '30%',
-      marginBottom: 4,
-    },
-    label: {
-      fontSize: 12,
-      color: '#555',
-      fontWeight: '600',
-    },
-    value: {
-      fontSize: 14,
-      color: '#000',
-    },
-    DeleteIcon: {
-      padding: 6,
-      alignSelf: 'flex-start',
-      flexWrap: 'wrap',
-    },
-
+  
     //BOTÕES FINAL DA TELA
     saveButton: {
       backgroundColor: '#B0CB0E',
